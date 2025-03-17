@@ -1,0 +1,55 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">🎧 AudioStore</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Shop</a></li>
+                <li><a href="#">Collections</a></li>
+                <li><a href="#">Explore</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#"><img src="assets/search-icon.png" alt="Search"></a>
+                <a href="login.html"><img src="assets/user-icon.png" alt="User"></a>
+                <a href="cart.html"><img src="assets/cart-icon.png" alt="Cart"></a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="cart">
+        <h2>Your Cart</h2>
+        <div class="cart-container">
+            <!-- Cart items yahan display hongi -->
+        </div>
+    </section>
+
+    <script>
+        const cartContainer = document.querySelector('.cart-container');
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+            cart.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                `;
+                cartContainer.appendChild(productCard);
+            });
+        }
+    </script>
+</body>
+</html>
